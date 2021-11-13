@@ -11,7 +11,9 @@ import (
 	"google.golang.org/grpc"
 )
 
-type server struct{}
+type server struct{
+	greetpb.UnimplementedGreetServiceServer
+}
 
 func (*server) Greet(ctx context.Context, req *greetpb.GreetRequest) (*greetpb.GreetResponse, error) {
 
@@ -27,7 +29,7 @@ func (*server) Greet(ctx context.Context, req *greetpb.GreetRequest) (*greetpb.G
 
 func main() {
 	fmt.Println("Hello world");
-	lis, err := net.Listen("tcp", "0.0.0.50051")
+	lis, err := net.Listen("tcp", "0.0.0.0:50051")
 	if err != nil {
 		log.Fatalf("Failed to listen %v", err)
 	}
